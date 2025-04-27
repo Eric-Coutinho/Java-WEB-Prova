@@ -1,0 +1,23 @@
+package model;
+
+public class Usuario {
+
+	private String Login;
+	private String Senha;
+	
+	public String getLogin() {
+		return Login;
+	}
+	
+	public String getSenha() {
+		return Senha;
+	}
+	
+	public void setLogin(String Login) {
+		Login = login;
+	}
+	
+	public void setSenha(String Senha) {
+		this.senha = senha;
+	}
+}

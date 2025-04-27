@@ -1,0 +1,27 @@
+package controlador;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller 
+public class Controller_Basico {
+
+	@GetMapping("/")
+	public String home() {
+		return home.html;
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return login.html;
+	}
+	
+	@PostMapping("/valida")
+	@ResponseBody
+	public String valida(@RequestParam String login, @RequestParam String senha) {
+		return "Os dados infromados foram:" + login + " - " + senha;
+	}
+}

@@ -1,0 +1,18 @@
+package com.javaweb.app02;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller 
+public class Controller_Basico {
+
+	@GetMapping("/")
+	public String home() {
+		return home.html;
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return login.html;
+	}
+}

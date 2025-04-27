@@ -1,0 +1,60 @@
+package com.javaweb.app03.Controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.javaweb.app03.model.Usuario;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class UsuarioController {
+
+	
+
+	
+	/*
+	@GetMapping("/login")
+	public String mostrar_TelaLogin() {
+		return "login.html";
+	}
+	
+	@PostMapping("/validar")
+	public String validarCredenciais(@ModelAttribute Usuario usr, Model modelo, HttpSession sessao) {
+		if(usr.getLogin().equalsIgnoreCase("Mohannad") && usr.getSenha().equalsIgnoreCase("12345")) {
+			sessao.setAttribute("usuarioLogado", usr);
+			return "redirect:/home";
+		}
+		
+		else {
+			modelo.addAttribute("msg", "Usuario ou Senha incorretos");
+			return "login";
+		}
+	}
+		
+	@GetMapping("/home")
+	public String mostraTelaInicial(HttpSession session, Model model) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if(usuario == null) {
+			model.addAttribute("msg", "Sessao expirou ou usuario deslogado");
+			return "redirect:/login";
+		}
+		
+		else {
+			model.addAttribute("NomeUsuario", usuario.getLogin());
+			return "home";
+		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession sessao) {
+		sessao.invalidate();
+		return "redirect:/login";
+	}
+	
+	*/
+}

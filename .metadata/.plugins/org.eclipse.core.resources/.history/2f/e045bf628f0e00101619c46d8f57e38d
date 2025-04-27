@@ -1,0 +1,14 @@
+<DOCTYPE html>
+	<html>
+		<head>
+			<title>Index</title>
+		</head>
+		<body>
+			<h1>Modulo 02 - Controllers MVC</h1>
+			<h2>Pagina de Abertura</h2>
+			
+			<a href="/login">Entrar</a>
+			<br>
+			<a href="/novousr">Novo Cadastro</a>
+		</body>
+		</html>		

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Tela de Login</h2>
+    <form method="post" th:action="@{/validar}">
+        <div th:if="${msg}" style="color:red" th:text="${msg}"></div>
+        
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+        
+        <label>Senha:</label>
+        <input type="password" name="senha" required><br><br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

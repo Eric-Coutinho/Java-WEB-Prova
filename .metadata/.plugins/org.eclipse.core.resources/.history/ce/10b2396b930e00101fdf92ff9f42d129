@@ -1,0 +1,22 @@
+package com.javaweb.app03.Controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class BaseController {
+
+	
+	@GetMapping("/ola")
+	@ResponseBody
+	public String saudacao() {
+		return "Ola Mundo";
+	}
+	
+	
+	@GetMapping("/ola")
+	public String index() {
+		return "index";
+	}
+}

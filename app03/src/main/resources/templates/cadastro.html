@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <form method="post" th:action="@{/cadastrar}" th:object="${usuario}">
+        <div th:if="${erro}" style="color:red" th:text="${erro}"></div>
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" required>
+        <br><br>
+        
+        <label for="perfil">Perfil:</label>
+        <select id="perfil" th:field="*{perfil}" required>
+            <option value="aluno">Aluno</option>
+            <option value="professor">Professor</option>
+            <option value="coordenacao">Coordenação</option>
+        </select>
+        <br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+        <br><br>
+        
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" th:field="*{senha}" required>
+        <br><br>
+        
+        <label for="confirmaSenha">Confirmar Senha:</label>
+        <input type="password" id="confirmaSenha" th:field="*{confirmaSenha}" required>
+        <br><br>
+        
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

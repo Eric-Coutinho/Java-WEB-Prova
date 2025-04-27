@@ -1,0 +1,25 @@
+<DOCTYPE html>
+	<html>
+		<head>
+			<title>login</title>
+		</head>
+		<body>
+			<h1>Suas credenciais por favor..</h1>
+			<h2>Login</h2>
+			
+			<form action="/validar" method="post">
+				<table>
+					<tr>
+						<td><label>Usuario:</label></td>
+						<td><input type="text" name="login" required></td>
+					</tr>
+					
+					<tr>
+						<td><label>Senha:</label></td>
+						<td><input type="password" name="senha" required></td>
+					</tr>	
+				</table>
+				<button type="submit">Entrar</button>
+			</form>					
+		</body>
+		</html>		

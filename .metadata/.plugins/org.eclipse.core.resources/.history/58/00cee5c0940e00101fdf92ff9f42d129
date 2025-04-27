@@ -1,0 +1,16 @@
+<DOCTYPE html>
+	<html>
+		<head>
+			<title>Home</title>
+		</head>
+		<body>
+			<h1>Modulo 02 - Controllers MVC</h1>
+			<h2>Pagina HOME</h2>
+			<br>
+			
+			Ola...<p th:style="'color: red'" th:text="${NomeUsuario}"</p> 
+				<br>
+			<a href="/logout">Sair</a>
+			<br>
+		</body>
+		</html>	
