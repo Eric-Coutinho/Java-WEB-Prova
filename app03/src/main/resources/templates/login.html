@@ -2,116 +2,139 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-         /* General Styles */
         body {
-            font-family: sans-serif;
-            margin: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #f8f9fa;
+            color: #343a40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        h1, h2, h3 {
-            color: #0056b3; /* A blue tone for headers */
-            margin-bottom: 15px;
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
         }
 
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+        h2 {
+            color: #0d6efd;
+            margin-bottom: 25px;
+            margin-top: 0;
+            font-size: 1.8em;
+            font-weight: 500;
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-            margin-right: 10px; /* Add some spacing between links */
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background-color: #ccc;
-            margin: 20px 0;
-        }
-
-        /* Form Styling */
         form {
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            max-width: 500px; /* Limit form width for better readability */
-            margin-bottom: 20px;
+            text-align: left;
+            margin-top: 20px;
         }
 
         form label {
-            display: block; /* Place labels above inputs */
-            margin-bottom: 5px;
-            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
         }
 
-        form input[type="text"],
         form input[type="email"],
-        form input[type="password"],
-        form input[type="date"],
-        form select {
-            width: calc(100% - 22px); /* Account for padding and border */
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
         }
 
-         form select {
-             width: 100%; /* Select needs full width */
+        form input[type="email"]:focus,
+        form input[type="password"]:focus {
+             border-color: #86b7fe;
+             outline: 0;
+             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
         }
 
 
         form button[type="submit"] {
-            background-color: #28a745; /* Green */
+            background-color: #0d6efd;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.1em;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 10px;
             transition: background-color 0.3s ease;
         }
 
         form button[type="submit"]:hover {
-            background-color: #218838; /* Darker green */
+            background-color: #0b5ed7;
         }
 
-        /* Error Message Styling */
-        .error-message, div[style*="color:red"] { /* Target specific class and inline style */
-            color: #dc3545; /* Bootstrap danger color */
-            background-color: #f8d7da; /* Light red background */
-            border: 1px solid #f5c6cb; /* Reddish border */
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            font-weight: bold;
+        .error-message {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
         }
+
+        .form-links {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .form-links a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+         .form-links a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
-    <h2>Tela de Login</h2>
-    <form method="post" th:action="@{/validar}">
+    <div class="container">
+        <h2>Tela de Login</h2>
+
         <div th:if="${msg}" class="error-message" th:text="${msg}"></div>
 
-        <label for="email">Email:</label> <input type="email" id="email" name="email" required><br>
+        <form method="post" th:action="@{/validar}">
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required placeholder="********">
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
 
-        <label for="senha">Senha:</label> <input type="password" id="senha" name="senha" required><br><br>
-
-        <button type="submit">Enviar</button>
-    </form>
-     <a href="/cadastro">Criar Novo Cadastro</a> | <a href="/">Voltar</a>
+        <div class="form-links">
+            <a href="/cadastro">Criar Novo Cadastro</a> | <a href="/">Voltar</a>
+        </div>
+    </div>
 </body>
 </html>

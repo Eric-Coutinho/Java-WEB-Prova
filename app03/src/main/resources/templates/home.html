@@ -3,63 +3,110 @@
     <head>
         <title>Home</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             /* General Styles */
             body {
-                font-family: sans-serif;
-                margin: 20px;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                margin: 0; /* Remove default margin */
                 line-height: 1.6;
-                background-color: #f4f4f4;
-                color: #333;
+                background-color: #f8f9fa; /* Lighter gray background */
+                color: #343a40; /* Darker text color */
+                display: flex; /* Enable Flexbox */
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                min-height: 100vh; /* Ensure body takes full viewport height */
+                padding: 20px; /* Add padding around content */
+                box-sizing: border-box; /* Include padding in size calculations */
             }
 
-            h1, h2, h3 {
-                color: #0056b3; /* A blue tone for headers */
-                margin-bottom: 15px;
+            /* Content Container */
+            .container {
+                background-color: #ffffff; /* White background for content */
+                padding: 40px;
+                border-radius: 12px; /* More rounded corners */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+                text-align: center; /* Center text within the container */
+                max-width: 600px; /* Limit container width */
+                width: 100%; /* Make container responsive */
+            }
+
+            h1, h2 {
+                color: #0d6efd; /* Bootstrap primary blue */
+                margin-bottom: 20px;
             }
 
             h1 {
-                border-bottom: 2px solid #eee;
-                padding-bottom: 10px;
+                font-size: 2.2em;
+                border-bottom: 1px solid #dee2e6; /* Lighter border */
+                padding-bottom: 15px;
+                margin-top: 0; /* Remove default top margin */
             }
 
-            a {
-                color: #007bff;
-                text-decoration: none;
-                margin-right: 10px; /* Add some spacing between links */
-                display: inline-block; /* Make links block-like for margin */
-                margin-bottom: 10px; /* Add space below links */
-                padding: 8px 15px; /* Add padding to links */
-                background-color: #e7f3ff; /* Light blue background */
-                border: 1px solid #cfe2ff; /* Blue border */
-                border-radius: 4px; /* Rounded corners */
+            h2 {
+                font-size: 1.5em;
+                font-weight: 500; /* Slightly lighter weight */
+                color: #6c757d; /* Secondary text color */
             }
 
-            a:hover {
-                text-decoration: none;
-                background-color: #cfe2ff; /* Darker blue on hover */
-            }
-
-            /* Utility Classes */
+            /* User Greeting */
             .user-greeting {
-                color: #198754; /* Bootstrap success color */
-                font-weight: bold;
-                font-size: 1.1em;
-                margin-bottom: 20px;
+                color: #198754; /* Bootstrap success green */
+                font-weight: 600; /* Bolder */
+                font-size: 1.3em;
+                margin: 25px 0; /* Add vertical spacing */
+                padding: 10px;
+                background-color: #d1e7dd; /* Light green background */
+                border-radius: 6px;
+                display: inline-block; /* Fit content width */
             }
+
+            /* Navigation Links Styling */
+            .nav-link {
+                color: #ffffff; /* White text */
+                background-color: #0d6efd; /* Bootstrap primary blue */
+                text-decoration: none;
+                margin: 10px 5px; /* Add space around links */
+                display: inline-block;
+                padding: 12px 25px; /* Larger padding */
+                border-radius: 8px; /* Rounded corners */
+                font-size: 1em;
+                font-weight: 500;
+                transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            }
+
+            .nav-link:hover {
+                background-color: #0b5ed7; /* Darker blue on hover */
+                text-decoration: none;
+                transform: translateY(-2px); /* Slight lift effect */
+            }
+
+            .nav-link.logout {
+                background-color: #6c757d; /* Gray for logout */
+            }
+
+            .nav-link.logout:hover {
+                background-color: #5c636a; /* Darker gray */
+            }
+
+            /* Links Container */
+            .nav-links {
+                margin-top: 30px; /* Space above links */
+            }
+
         </style>
     </head>
     <body>
-        <h1>Modulo 02 - Controllers MVC</h1>
-        <h2>Pagina HOME</h2>
-        <br>
+        <div class="container">
+            <h2>Página Inicial</h2>
 
-        Olá...<p class="user-greeting" th:text="${NomeUsuario}">Nome do Usuário</p>
+            <p class="user-greeting">Olá, <span th:text="${NomeUsuario}">Nome do Usuário</span>!</p>
 
-        <br>
-            <a href="/tarefas">Ver Minhas Tarefas</a>
-        <br>
-            <a href="/logout">Sair</a>
-        <br>
+            <div class="nav-links">
+                <a href="/tarefas" class="nav-link">Ver Minhas Tarefas</a>
+                <a href="/logout" class="nav-link logout">Sair</a>
+            </div>
+        </div>
     </body>
 </html>

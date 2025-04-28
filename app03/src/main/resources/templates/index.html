@@ -3,50 +3,94 @@
     <head>
         <title>Index</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-             /* General Styles */
             body {
-                font-family: sans-serif;
-                margin: 20px;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                margin: 0;
                 line-height: 1.6;
-                background-color: #f4f4f4;
-                color: #333;
+                background-color: #f8f9fa;
+                color: #343a40;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 20px;
+                box-sizing: border-box;
             }
 
-            h1, h2, h3 {
-                color: #0056b3; /* A blue tone for headers */
-                margin-bottom: 15px;
+            .container {
+                background-color: #ffffff;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                max-width: 600px;
+                width: 100%;
+            }
+
+            h1, h2 {
+                color: #0d6efd;
+                margin-bottom: 20px;
             }
 
             h1 {
-                border-bottom: 2px solid #eee;
-                padding-bottom: 10px;
+                font-size: 2.2em;
+                border-bottom: 1px solid #dee2e6;
+                padding-bottom: 15px;
+                margin-top: 0;
             }
 
-            a {
-                color: #007bff;
-                text-decoration: none;
-                margin-right: 10px; /* Add some spacing between links */
-                display: inline-block; /* Make links block-like for margin */
-                margin-bottom: 10px; /* Add space below links */
-                padding: 8px 15px; /* Add padding to links */
-                background-color: #e7f3ff; /* Light blue background */
-                border: 1px solid #cfe2ff; /* Blue border */
-                border-radius: 4px; /* Rounded corners */
+            h2 {
+                font-size: 1.5em;
+                font-weight: 500;
+                color: #6c757d;
+                 margin-bottom: 30px; /* More space before links */
             }
 
-            a:hover {
+            .nav-link {
+                color: #ffffff;
+                background-color: #0d6efd;
                 text-decoration: none;
-                background-color: #cfe2ff; /* Darker blue on hover */
+                margin: 10px 5px;
+                display: inline-block;
+                padding: 12px 25px;
+                border-radius: 8px;
+                font-size: 1.1em; /* Slightly larger font for primary actions */
+                font-weight: 500;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
+
+            .nav-link:hover {
+                background-color: #0b5ed7;
+                text-decoration: none;
+                transform: translateY(-2px);
+            }
+
+            .nav-link.register { /* Specific style for register if needed */
+                background-color: #198754; /* Green */
+            }
+
+             .nav-link.register:hover {
+                background-color: #157347; /* Darker green */
+            }
+
+
+            .nav-links {
+                margin-top: 30px;
+            }
+
         </style>
     </head>
     <body>
-        <h1>Modulo 02 - Controllers MVC</h1>
-        <h2>Pagina de Abertura</h2>
-
-        <a href="/login">Entrar</a>
-        <br>
-        <a href="/cadastro">Novo Cadastro</a>
+        <div class="container">
+            <h1>Pagina de Abertura</h1>
+			<h2>Controle de Tarefas</h2>
+            <div class="nav-links">
+                <a href="/login" class="nav-link">Entrar</a>
+                <a href="/cadastro" class="nav-link register">Novo Cadastro</a>
+            </div>
+        </div>
     </body>
 </html>
