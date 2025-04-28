@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        .concluida {
+            text-decoration: line-through;
+            color: grey;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+         .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minhas Tarefas</h1>
+    <p>Usuário: <span th:text="${NomeUsuario}">Nome do Usuário</span></p>
+    <a href="/logout">Sair</a> | <a href="/home">Voltar para Home</a> <hr>
+
+    <h2>Adicionar Nova Tarefa</h2>
+     <div th:if="${erroAdd}" class="error-message" th:text="${erroAdd}"></div>
+    <form method="post" th:action="@{/tarefas/add}">
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required size="50">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <hr>
+
+    <h2>Tarefas Pendentes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Data Criação</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tarefa : ${tarefas}" th:if="${!tarefa.concluida}">
+                <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
+                <td th:text="${tarefa.dataCriacao}">dd/MM/yyyy</td>
+                <td>
+                    <form method="post" th:action="@{/tarefas/complete/{id}(id=${tarefa.id})}" style="display: inline;">
+                         <label for="dataConclusao">Data Conclusão (opcional, yyyy-MM-dd):</label>
+                         <input type="date" id="dataConclusao" name="dataConclusao">
+                        <button type="submit">Concluir</button>
+                    </form>
+                     <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta tarefa?');">Remover</button>
+                    </form>
+                </td>
+            </tr>
+             <tr th:if="${#lists.isEmpty(tarefas.?[!concluida])}">
+                 <td colspan="3">Nenhuma tarefa pendente.</td>
+             </tr>
+        </tbody>
+    </table>
+
+    <h2>Tarefas Concluídas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Data Criação</th>
+                <th>Data Conclusão</th>
+                 <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+             <tr th:each="tarefa : ${tarefas}" th:if="${tarefa.concluida}" class="concluida">
+                <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
+                <td th:text="${tarefa.dataCriacao}">dd/MM/yyyy</td>
+                <td th:text="${tarefa.dataConclusao}">dd/MM/yyyy</td>
+                 <td>
+                    <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta tarefa?');">Remover</button>
+                    </form>
+                 </td>
+            </tr>
+             <tr th:if="${#lists.isEmpty(tarefas.?[concluida])}">
+                <td colspan="4">Nenhuma tarefa concluída.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
