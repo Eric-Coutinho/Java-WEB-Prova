@@ -1,22 +1,65 @@
-<DOCTYPE html>
-	<html>
-		<head>
-			<title>Home</title>
-		</head>
-		<body>
-			<h1>Modulo 02 - Controllers MVC</h1>
-			<h2>Pagina HOME</h2>
-			<br>
-			
-			Ola...<p th:style="'color: green'" th:text="${NomeUsuario}"</p> 
-				<br>
-			<a href="/logout">Sair</a>
-			<br>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <style>
+            /* General Styles */
+            body {
+                font-family: sans-serif;
+                margin: 20px;
+                line-height: 1.6;
+                background-color: #f4f4f4;
+                color: #333;
+            }
 
-			<br>
-				<a href="/tarefas">Ver Minhas Tarefas</a>
-			<br>
-				<a href="/logout">Sair</a>
-			<br>
-		</body>
-		</html>	
+            h1, h2, h3 {
+                color: #0056b3; /* A blue tone for headers */
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                border-bottom: 2px solid #eee;
+                padding-bottom: 10px;
+            }
+
+            a {
+                color: #007bff;
+                text-decoration: none;
+                margin-right: 10px; /* Add some spacing between links */
+                display: inline-block; /* Make links block-like for margin */
+                margin-bottom: 10px; /* Add space below links */
+                padding: 8px 15px; /* Add padding to links */
+                background-color: #e7f3ff; /* Light blue background */
+                border: 1px solid #cfe2ff; /* Blue border */
+                border-radius: 4px; /* Rounded corners */
+            }
+
+            a:hover {
+                text-decoration: none;
+                background-color: #cfe2ff; /* Darker blue on hover */
+            }
+
+            /* Utility Classes */
+            .user-greeting {
+                color: #198754; /* Bootstrap success color */
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Modulo 02 - Controllers MVC</h1>
+        <h2>Pagina HOME</h2>
+        <br>
+
+        Olá...<p class="user-greeting" th:text="${NomeUsuario}">Nome do Usuário</p>
+
+        <br>
+            <a href="/tarefas">Ver Minhas Tarefas</a>
+        <br>
+            <a href="/logout">Sair</a>
+        <br>
+    </body>
+</html>

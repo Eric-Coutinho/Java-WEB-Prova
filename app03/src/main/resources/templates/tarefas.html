@@ -5,35 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
     <style>
-        .concluida {
-            text-decoration: line-through;
-            color: grey;
+        /* General Styles */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 5px;
+
+        h1, h2, h3 {
+            color: #0056b3; /* A blue tone for headers */
+            margin-bottom: 15px;
         }
-        th {
-            background-color: #f2f2f2;
+
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
         }
-         .error-message {
-            color: red;
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px; /* Add some spacing between links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
+        /* Form Styling */
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px; /* Slightly wider for task input */
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block; /* Place labels above inputs */
+            margin-bottom: 5px;
             font-weight: bold;
         }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="date"],
+        form select {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+         form select {
+             width: 100%; /* Select needs full width */
+        }
+
+        form button[type="submit"] {
+            background-color: #28a745; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #218838; /* Darker green */
+        }
+
+        /* Specific Form Adjustments for Tarefas */
+        #tarefas-body form { /* Target forms within the tarefas page specifically */
+            display: inline-block; /* Keep complete/delete buttons inline */
+            margin-right: 10px;
+            box-shadow: none; /* Remove box shadow for inline forms */
+            padding: 0;       /* Remove padding for inline forms */
+            background: none; /* Remove background for inline forms */
+            max-width: none;  /* Allow inline forms to size naturally */
+            margin-bottom: 0; /* No bottom margin for inline forms */
+        }
+
+         #tarefas-body form label { /* Target labels in inline forms */
+             display: inline-block; /* Keep label inline */
+             margin-right: 5px;
+             margin-bottom: 0;
+             font-weight: normal; /* Normal weight for these labels */
+             font-size: 0.9em;
+         }
+
+
+        #tarefas-body form input[type="date"]{
+            width: auto; /* Don't force full width on date input */
+            margin-bottom: 0; /* Remove bottom margin */
+            padding: 5px; /* Smaller padding */
+            font-size: 0.9em;
+            vertical-align: middle; /* Align vertically with button */
+        }
+
+        #tarefas-body form button[type="submit"] {
+            padding: 5px 10px; /* Smaller buttons for actions */
+            font-size: 0.9em;
+             vertical-align: middle; /* Align vertically with input */
+        }
+
+        /* Button for Removal */
+        #tarefas-body form button[type="submit"][onclick*="remover"] {
+            background-color: #dc3545; /* Red for delete */
+        }
+        #tarefas-body form button[type="submit"][onclick*="remover"]:hover {
+            background-color: #c82333; /* Darker red */
+        }
+
+
+        /* Table Styling (tarefas.html) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle; /* Align content vertically */
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .concluida td { /* Target cells within completed rows */
+            text-decoration: line-through;
+            color: grey;
+            background-color: #e9ecef; /* Slightly different background for completed rows */
+        }
+
+
+        /* Error Message Styling */
+        .error-message, div[style*="color:red"] { /* Target specific class and inline style */
+            color: #dc3545; /* Bootstrap danger color */
+            background-color: #f8d7da; /* Light red background */
+            border: 1px solid #f5c6cb; /* Reddish border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* Make add task input wider */
+        #descricao {
+             width: calc(80% - 22px); /* Make description wider */
+             margin-right: 10px; /* Add space before button */
+             display: inline-block; /* Allow button next to it */
+             vertical-align: middle;
+        }
+         #add-task-form button[type="submit"]{
+              width: auto; /* Let button size naturally */
+              display: inline-block;
+              vertical-align: middle;
+         }
     </style>
 </head>
-<body>
-    <h1>Minhas Tarefas</h1>
+<body id="tarefas-body"> <h1>Minhas Tarefas</h1>
     <p>Usuário: <span th:text="${NomeUsuario}">Nome do Usuário</span></p>
     <a href="/logout">Sair</a> | <a href="/home">Voltar para Home</a> <hr>
 
     <h2>Adicionar Nova Tarefa</h2>
      <div th:if="${erroAdd}" class="error-message" th:text="${erroAdd}"></div>
-    <form method="post" th:action="@{/tarefas/add}">
-        <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao" required size="50">
-        <button type="submit">Adicionar</button>
+    <form method="post" th:action="@{/tarefas/add}" id="add-task-form"> <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required> <button type="submit">Adicionar</button>
     </form>
 
     <hr>
@@ -52,12 +220,12 @@
                 <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
                 <td th:text="${tarefa.dataCriacao}">dd/MM/yyyy</td>
                 <td>
-                    <form method="post" th:action="@{/tarefas/complete/{id}(id=${tarefa.id})}" style="display: inline;">
+                    <form method="post" th:action="@{/tarefas/complete/{id}(id=${tarefa.id})}">
                          <label for="dataConclusao">Data Conclusão (opcional, yyyy-MM-dd):</label>
                          <input type="date" id="dataConclusao" name="dataConclusao">
                         <button type="submit">Concluir</button>
                     </form>
-                     <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}" style="display: inline;">
+                     <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta tarefa?');">Remover</button>
                     </form>
                 </td>
@@ -79,12 +247,11 @@
             </tr>
         </thead>
         <tbody>
-             <tr th:each="tarefa : ${tarefas}" th:if="${tarefa.concluida}" class="concluida">
-                <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
+             <tr th:each="tarefa : ${tarefas}" th:if="${tarefa.concluida}" class="concluida"> <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
                 <td th:text="${tarefa.dataCriacao}">dd/MM/yyyy</td>
                 <td th:text="${tarefa.dataConclusao}">dd/MM/yyyy</td>
                  <td>
-                    <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}" style="display: inline;">
+                    <form method="post" th:action="@{/tarefas/delete/{id}(id=${tarefa.id})}">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta tarefa?');">Remover</button>
                     </form>
                  </td>

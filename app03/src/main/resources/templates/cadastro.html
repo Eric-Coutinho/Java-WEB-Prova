@@ -4,15 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #0056b3; /* A blue tone for headers */
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px; /* Add some spacing between links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
+        /* Form Styling */
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 500px; /* Limit form width for better readability */
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block; /* Place labels above inputs */
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="date"],
+        form select {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        form select {
+             width: 100%; /* Select needs full width */
+        }
+
+
+        form button[type="submit"] {
+            background-color: #28a745; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #218838; /* Darker green */
+        }
+
+        /* Error Message Styling */
+        .error-message, div[style*="color:red"] { /* Target specific class and inline style */
+            color: #dc3545; /* Bootstrap danger color */
+            background-color: #f8d7da; /* Light red background */
+            border: 1px solid #f5c6cb; /* Reddish border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <h2>Novo Cadastro</h2>
     <form method="post" th:action="@{/cadastrar}" th:object="${usuario}">
-        <div th:if="${erro}" style="color:red" th:text="${erro}"></div>
-        
+        <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+
         <label for="nome">Nome:</label>
         <input type="text" id="nome" th:field="*{nome}" required>
         <br><br>
-        
+
         <label for="perfil">Perfil:</label>
         <select id="perfil" th:field="*{perfil}" required>
             <option value="aluno">Aluno</option>
@@ -20,20 +118,21 @@
             <option value="coordenacao">Coordenação</option>
         </select>
         <br><br>
-        
+
         <label for="email">Email:</label>
         <input type="email" id="email" th:field="*{email}" required>
         <br><br>
-        
+
         <label for="senha">Senha:</label>
         <input type="password" id="senha" th:field="*{senha}" required>
         <br><br>
-        
+
         <label for="confirmaSenha">Confirmar Senha:</label>
         <input type="password" id="confirmaSenha" th:field="*{confirmaSenha}" required>
         <br><br>
-        
+
         <button type="submit">Cadastrar</button>
     </form>
+    <a href="/login">Voltar para Login</a>
 </body>
 </html>
