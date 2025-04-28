@@ -1,49 +1,48 @@
 package com.javaweb.app03.Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import com.javaweb.app03.model.Usuario; 
+import com.javaweb.app03.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.javaweb.app03.model.Usuario;
-
-import jakarta.servlet.http.HttpSession;
+import java.util.Optional; 
 
 @Controller
 public class UsuarioController {
-    private static List<Usuario> usuarios = new ArrayList<>(Arrays.asList(
-        new Usuario("Admin", "admin", "admin@example.com", "admin123", "admin123")
-    ));
+
+    private final UsuarioService usuarioService;
+
+    @Autowired
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @GetMapping("/login")
     public String mostrar_TelaLogin() {
-        return "login";
+        return "login"; 
     }
-    
+
     @PostMapping("/validar")
     public String validarCredenciais(@ModelAttribute Usuario usr, Model modelo, HttpSession sessao) {
-        System.out.println("Attempting login with email: " + usr.getEmail());
-        System.out.println("Attempting login with password: " + usr.getSenha());
-        
-        for (Usuario usuario : usuarios) {
-            System.out.println("Checking against user: " + usuario.getEmail());
-            if (usuario.getEmail().equalsIgnoreCase(usr.getEmail()) && 
-                usuario.getSenha().equalsIgnoreCase(usr.getSenha())) {
-                sessao.setAttribute("usuarioLogado", usuario);
-                return "redirect:/home";
-            }
+        System.out.println("Controller: Attempting login with email: " + usr.getEmail());
+
+        Optional<Usuario> usuarioOptional = usuarioService.autenticar(usr.getEmail(), usr.getSenha());
+
+        if (usuarioOptional.isPresent()) {
+            sessao.setAttribute("usuarioLogado", usuarioOptional.get());
+            return "redirect:/home";
+        } else {
+            System.out.println("Controller: Login failed for email: " + usr.getEmail());
+            modelo.addAttribute("msg", "Email ou Senha incorretos");
+            return "login"; 
         }
-        
-        System.out.println("Login failed for email: " + usr.getEmail());
-        modelo.addAttribute("msg", "Email ou Senha incorretos");
-        return "login";
     }
-        
+
     @GetMapping("/home")
     public String mostraTelaInicial(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -56,27 +55,29 @@ public class UsuarioController {
             return "home";
         }
     }
-    
+
     @GetMapping("/logout")
     public String logout(HttpSession sessao) {
         sessao.invalidate();
         return "redirect:/login";
     }
-    
+
     @GetMapping("/cadastro")
     public String telaCadastro(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        return "cadastro";
+        model.addAttribute("usuario", new Usuario()); 
+        return "cadastro"; 
     }
-    
+
     @PostMapping("/cadastrar")
     public String cadastrarUsuario(@ModelAttribute Usuario usuario, Model model) {
-        if (!usuario.getSenha().equals(usuario.getConfirmaSenha())) {
-            model.addAttribute("erro", "As senhas não coincidem");
-            return "cadastro";
+
+        boolean sucesso = usuarioService.cadastrarUsuario(usuario);
+
+        if (!sucesso) {
+             model.addAttribute("erro", "As senhas não coincidem");
+             return "cadastro"; 
         }
-        
-        usuarios.add(usuario);
-        return "redirect:/login";
+
+        return "redirect:/login"; 
     }
 }
