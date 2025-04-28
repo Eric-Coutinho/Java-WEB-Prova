@@ -7,6 +7,16 @@ public class Usuario {
     private String senha;
     private String confirmaSenha;
 
+    public Usuario() { }
+
+    public Usuario(String nome, String perfil, String email, String senha, String confirmaSenha) {
+        this.nome = nome;
+        this.perfil = perfil;
+        this.email = email;
+        this.senha = senha;
+        this.confirmaSenha = confirmaSenha;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -44,17 +54,6 @@ public class Usuario {
     }
 
     public void setConfirmaSenha(String confirmaSenha) {
-        this.confirmaSenha = confirmaSenha;
-    }
-
-    public Usuario() {
-    }
-
-    public Usuario(String nome, String perfil, String email, String senha, String confirmaSenha) {
-        this.nome = nome;
-        this.perfil = perfil;
-        this.email = email;
-        this.senha = senha;
         this.confirmaSenha = confirmaSenha;
     }
 }
